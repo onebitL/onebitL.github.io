@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS文本高度的计算 | 南风</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="iOS,前端,object-c,Hexo,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。
+####单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS文本高度的计算">
+<meta property="og:url" content="http://yoursite.com/2016/06/02/iOS文本高度的计算/index.html">
+<meta property="og:site_name" content="南风">
+<meta property="og:description" content="之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。
+####单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;">
+<meta property="og:updated_time" content="2016-06-02T06:46:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS文本高度的计算">
+<meta name="twitter:description" content="之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。
+####单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=eaf5ab1e" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-iOS文本高度的计算" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">iOS文本高度的计算</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.06.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>onebitL</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://onebitl.github.io/2016/06/02/iOS文本高度的计算/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。</p>
+<p>####单行文本高度的计算方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(CGFloat)singLineTextSize&#123;</span><br><span class="line">    CGFloat height = 0;</span><br><span class="line">    height = [@&quot;这是一个单行文本。&quot; sizeWithAttributes:@&#123;NSFontAttributeName: [UIFont systemFontOfSize:15.0]&#125;].height;</span><br><span class="line">    return height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>NSLog可以看出文本高度是17.9，跟字体大小15.0还是差的挺多的。</p>
+<p>####多行文本高度的计算方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">NSMutableAttributedString *GetAttributedText(NSString *value) &#123;//这里调整富文本的段落格式</span><br><span class="line">    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:value];</span><br><span class="line">    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];</span><br><span class="line">    [paragraphStyle setLineSpacing:8.0];</span><br><span class="line">    //    [paragraphStyle setParagraphSpacing:11];  //调整段间距</span><br><span class="line">    //    [paragraphStyle setHeadIndent:75.0];//段落整体缩进</span><br><span class="line">    //    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进</span><br><span class="line">    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];</span><br><span class="line">    return attributedString;</span><br><span class="line">&#125;</span><br><span class="line">- (CGFloat)calculateMeaasgeHeightWithText:(NSString *)string andWidth:(CGFloat)width andFont:(UIFont *)font &#123;</span><br><span class="line">    static UILabel *stringLabel = nil;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;//生成一个同于计算文本高度的label</span><br><span class="line">        stringLabel = [[UILabel alloc] init];</span><br><span class="line">        stringLabel.numberOfLines = 0;</span><br><span class="line">    &#125;);</span><br><span class="line">    stringLabel.font = font;</span><br><span class="line">    stringLabel.attributedText = GetAttributedText(string);</span><br><span class="line">    return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2016/06/02/iOS文本高度的计算/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
