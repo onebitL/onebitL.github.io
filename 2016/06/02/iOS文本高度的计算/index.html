@@ -16,18 +16,18 @@
   
 
   <meta name="description" content="之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。
-####单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;">
+单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;#123">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS文本高度的计算">
 <meta property="og:url" content="http://yoursite.com/2016/06/02/iOS文本高度的计算/index.html">
 <meta property="og:site_name" content="南风">
 <meta property="og:description" content="之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。
-####单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;">
-<meta property="og:updated_time" content="2016-06-02T06:46:10.000Z">
+单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;#123">
+<meta property="og:updated_time" content="2016-06-02T06:55:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS文本高度的计算">
 <meta name="twitter:description" content="之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。
-####单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;">
+单行文本高度的计算方法12345-(CGFloat)singLineTextSize&amp;#123;    CGFloat height = 0;    height = [@&amp;quot;这是一个单行文本。&amp;quot; sizeWithAttributes:@&amp;#123">
 
   
 
@@ -152,6 +152,11 @@
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#单行文本高度的计算方法"><span class="toc-text">单行文本高度的计算方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多行文本高度的计算方法"><span class="toc-text">多行文本高度的计算方法</span></a></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
@@ -188,9 +193,9 @@
   <div class="article-content">
     
       <p>之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。</p>
-<p>####单行文本高度的计算方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(CGFloat)singLineTextSize&#123;</span><br><span class="line">    CGFloat height = 0;</span><br><span class="line">    height = [@&quot;这是一个单行文本。&quot; sizeWithAttributes:@&#123;NSFontAttributeName: [UIFont systemFontOfSize:15.0]&#125;].height;</span><br><span class="line">    return height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="单行文本高度的计算方法"><a href="#单行文本高度的计算方法" class="headerlink" title="单行文本高度的计算方法"></a>单行文本高度的计算方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(CGFloat)singLineTextSize&#123;</span><br><span class="line">    CGFloat height = 0;</span><br><span class="line">    height = [@&quot;这是一个单行文本。&quot; sizeWithAttributes:@&#123;NSFontAttributeName: [UIFont systemFontOfSize:15.0]&#125;].height;</span><br><span class="line">    return height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>NSLog可以看出文本高度是17.9，跟字体大小15.0还是差的挺多的。</p>
-<p>####多行文本高度的计算方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">NSMutableAttributedString *GetAttributedText(NSString *value) &#123;//这里调整富文本的段落格式</span><br><span class="line">    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:value];</span><br><span class="line">    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];</span><br><span class="line">    [paragraphStyle setLineSpacing:8.0];</span><br><span class="line">    //    [paragraphStyle setParagraphSpacing:11];  //调整段间距</span><br><span class="line">    //    [paragraphStyle setHeadIndent:75.0];//段落整体缩进</span><br><span class="line">    //    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进</span><br><span class="line">    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];</span><br><span class="line">    return attributedString;</span><br><span class="line">&#125;</span><br><span class="line">- (CGFloat)calculateMeaasgeHeightWithText:(NSString *)string andWidth:(CGFloat)width andFont:(UIFont *)font &#123;</span><br><span class="line">    static UILabel *stringLabel = nil;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;//生成一个同于计算文本高度的label</span><br><span class="line">        stringLabel = [[UILabel alloc] init];</span><br><span class="line">        stringLabel.numberOfLines = 0;</span><br><span class="line">    &#125;);</span><br><span class="line">    stringLabel.font = font;</span><br><span class="line">    stringLabel.attributedText = GetAttributedText(string);</span><br><span class="line">    return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="多行文本高度的计算方法"><a href="#多行文本高度的计算方法" class="headerlink" title="多行文本高度的计算方法"></a>多行文本高度的计算方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">NSMutableAttributedString *GetAttributedText(NSString *value) &#123;//这里调整富文本的段落格式</span><br><span class="line">    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:value];</span><br><span class="line">    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];</span><br><span class="line">    [paragraphStyle setLineSpacing:8.0];</span><br><span class="line">    //    [paragraphStyle setParagraphSpacing:11];  //调整段间距</span><br><span class="line">    //    [paragraphStyle setHeadIndent:75.0];//段落整体缩进</span><br><span class="line">    //    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进</span><br><span class="line">    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];</span><br><span class="line">    return attributedString;</span><br><span class="line">&#125;</span><br><span class="line">- (CGFloat)calculateMeaasgeHeightWithText:(NSString *)string andWidth:(CGFloat)width andFont:(UIFont *)font &#123;</span><br><span class="line">    static UILabel *stringLabel = nil;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;//生成一个同于计算文本高度的label</span><br><span class="line">        stringLabel = [[UILabel alloc] init];</span><br><span class="line">        stringLabel.numberOfLines = 0;</span><br><span class="line">    &#125;);</span><br><span class="line">    stringLabel.font = font;</span><br><span class="line">    stringLabel.attributedText = GetAttributedText(string);</span><br><span class="line">    return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
   </div>
