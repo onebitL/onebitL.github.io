@@ -14,8 +14,8 @@
     
     <meta name="description" content="之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。
 单行文本高度的计算方法-(CGFloat)singLineTextSize{
-    CGFloat height = 0;
-    height = [@&amp;quot">
+CGFloat height = 0;
+height = [@&amp;quot;这是一个单行文">
     
     
     
@@ -85,7 +85,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-06-02T06:35:31.000Z" itemprop="datePublished">2016-06-02</time>
-    Updated:<time datetime="2016-06-13T02:45:44.000Z" itemprop="dateModified">2016-06-13</time>
+    Updated:<time datetime="2016-06-13T02:48:50.000Z" itemprop="dateModified">2016-06-13</time>
     
   </p>
 </header>
@@ -98,19 +98,34 @@
 		</div>
 		
 		<p>之前一直以为，单行文字的高度等于font的大小，也没有细细研究，好吧，其实这种想当然的认识是极其不正确的，还是需要通过方法进行计算。</p>
-<h3 id="单行文本高度的计算方法"><a href="#单行文本高度的计算方法" class="headerlink" title="单行文本高度的计算方法"></a>单行文本高度的计算方法</h3><p><code>-(CGFloat)singLineTextSize{
-    CGFloat height = 0;
-    height = [@&quot;这是一个单行文本。&quot; sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15.0]}].height;
-    return height;
-}</code></p>
-<p>NSLog可以看出文本高度是17.9，跟字体大小15.0还是差的挺多的。</p>
-<h3 id="多行文本高度的计算方法"><a href="#多行文本高度的计算方法" class="headerlink" title="多行文本高度的计算方法"></a>多行文本高度的计算方法</h3><p>`<br>NSMutableAttributedString <em>GetAttributedText(NSString </em>value) {//这里调整富文本的段落格式<br>    NSMutableAttributedString <em>attributedString = [[NSMutableAttributedString alloc] initWithString:value];<br>    NSMutableParagraphStyle </em>paragraphStyle = [[NSMutableParagraphStyle alloc] init];<br>    [paragraphStyle setLineSpacing:8.0];<br>    //    [paragraphStyle setParagraphSpacing:11];  //调整段间距<br>    //    [paragraphStyle setHeadIndent:75.0];//段落整体缩进<br>    //    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进<br>    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];<br>    return attributedString;<br>}</p>
-<ul>
-<li>(CGFloat)calculateMeaasgeHeightWithText:(NSString <em>)string andWidth:(CGFloat)width andFont:(UIFont </em>)font {<br>  static UILabel *stringLabel = nil;<br>  static dispatch_once_t onceToken;<br>  dispatch_once(&amp;onceToken, ^{//生成一个同于计算文本高度的label<pre><code>stringLabel = [[UILabel alloc] init];
-stringLabel.numberOfLines = 0;
-</code></pre>  });<br>  stringLabel.font = font;<br>  stringLabel.attributedText = GetAttributedText(string);<br>  return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;<br>}<br>`</li>
-</ul>
-  
+<h3 id="单行文本高度的计算方法"><a href="#单行文本高度的计算方法" class="headerlink" title="单行文本高度的计算方法"></a>单行文本高度的计算方法</h3><pre><code>-(CGFloat)singLineTextSize{
+CGFloat height = 0;
+height = [@&quot;这是一个单行文本。&quot; sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15.0]}].height;
+return height;
+}
+</code></pre><p>NSLog可以看出文本高度是17.9，跟字体大小15.0还是差的挺多的。</p>
+<h3 id="多行文本高度的计算方法"><a href="#多行文本高度的计算方法" class="headerlink" title="多行文本高度的计算方法"></a>多行文本高度的计算方法</h3><pre><code>NSMutableAttributedString *GetAttributedText(NSString *value) {//这里调整富文本的段落格式
+NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:value];
+NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+[paragraphStyle setLineSpacing:8.0];
+//    [paragraphStyle setParagraphSpacing:11];  //调整段间距
+//    [paragraphStyle setHeadIndent:75.0];//段落整体缩进
+//    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进
+[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];
+return attributedString;
+}
+- (CGFloat)calculateMeaasgeHeightWithText:(NSString *)string andWidth:(CGFloat)width andFont:(UIFont *)font {
+static UILabel *stringLabel = nil;
+static dispatch_once_t onceToken;
+dispatch_once(&amp;onceToken, ^{//生成一个同于计算文本高度的label
+    stringLabel = [[UILabel alloc] init];
+    stringLabel.numberOfLines = 0;
+});
+stringLabel.font = font;
+stringLabel.attributedText = GetAttributedText(string);
+return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;
+}
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
