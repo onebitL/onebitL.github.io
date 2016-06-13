@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="南风">南风</a></h1>
 				<a class="blog-motto"></a>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -63,7 +63,7 @@
 					
                                             <form class="search" action=http://zhannei.baidu.com/cse/search target="_blank">
                                             <label>Search</label>
-                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="Search"><br>
 					
 					</li>
 				</ul>
@@ -85,7 +85,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-06-02T06:35:31.000Z" itemprop="datePublished">2016-06-02</time>
-    更新日期:<time datetime="2016-06-13T03:24:00.000Z" itemprop="dateModified">2016-06-13</time>
+    Updated:<time datetime="2016-06-13T03:25:01.000Z" itemprop="dateModified">2016-06-13</time>
     
   </p>
 </header>
@@ -93,7 +93,7 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#单行文本高度的计算方法"><span class="toc-number">1.</span> <span class="toc-text">单行文本高度的计算方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多行文本高度的计算方法"><span class="toc-number">2.</span> <span class="toc-text">多行文本高度的计算方法</span></a></li></ol>
 		</div>
 		
@@ -106,7 +106,7 @@
     return height;
     }</code></p>
 <p>NSLog可以看出文本高度是17.9，跟字体大小15.0还是差的挺多的。</p>
-<h3 id="多行文本高度的计算方法"><a href="#多行文本高度的计算方法" class="headerlink" title="多行文本高度的计算方法"></a>多行文本高度的计算方法</h3><p>` NSMutableAttributedString <em>GetAttributedText(NSString </em>value) {//这里调整富文本的段落格式<br>    NSMutableAttributedString <em>attributedString = [[NSMutableAttributedString alloc] initWithString:value];<br>    NSMutableParagraphStyle </em>paragraphStyle = [[NSMutableParagraphStyle alloc] init];<br>    [paragraphStyle setLineSpacing:8.0];<br>    //    [paragraphStyle setParagraphSpacing:11];  //调整段间距<br>    //    [paragraphStyle setHeadIndent:75.0];//段落整体缩进<br>    //    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进<br>    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];<br>    return attributedString;<br>    }</p>
+<h3 id="多行文本高度的计算方法"><a href="#多行文本高度的计算方法" class="headerlink" title="多行文本高度的计算方法"></a>多行文本高度的计算方法</h3><p>`<br>NSMutableAttributedString <em>GetAttributedText(NSString </em>value) {//这里调整富文本的段落格式<br>    NSMutableAttributedString <em>attributedString = [[NSMutableAttributedString alloc] initWithString:value];<br>    NSMutableParagraphStyle </em>paragraphStyle = [[NSMutableParagraphStyle alloc] init];<br>    [paragraphStyle setLineSpacing:8.0];<br>    //    [paragraphStyle setParagraphSpacing:11];  //调整段间距<br>    //    [paragraphStyle setHeadIndent:75.0];//段落整体缩进<br>    //    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进<br>    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];<br>    return attributedString;<br>    }</p>
 <pre><code>- (CGFloat)calculateMeaasgeHeightWithText:(NSString *)string andWidth:(CGFloat)width andFont:(UIFont *)font {
 static UILabel *stringLabel = nil;
 static dispatch_once_t onceToken;
@@ -117,8 +117,9 @@ dispatch_once(&amp;onceToken, ^{//生成一个同于计算文本高度的label
 stringLabel.font = font;
 stringLabel.attributedText = GetAttributedText(string);
 return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;
-} `
-</code></pre>  
+} 
+</code></pre><p>`</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -164,15 +165,15 @@ return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
   <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#单行文本高度的计算方法"><span class="toc-number">1.</span> <span class="toc-text">单行文本高度的计算方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多行文本高度的计算方法"><span class="toc-number">2.</span> <span class="toc-text">多行文本高度的计算方法</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 <div id="authorInfo">
 	
@@ -192,7 +193,7 @@ return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
       <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
       <li><a href="http://gengbiao.me" target="_blank" title="coney">coney's Blog</a></li>
@@ -201,7 +202,7 @@ return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;
 
 
   <div class="rsspart">
-	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
   
