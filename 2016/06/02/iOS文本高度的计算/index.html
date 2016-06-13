@@ -85,7 +85,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-06-02T06:35:31.000Z" itemprop="datePublished">2016-06-02</time>
-    Updated:<time datetime="2016-06-13T03:25:59.000Z" itemprop="dateModified">2016-06-13</time>
+    Updated:<time datetime="2016-06-13T03:27:34.000Z" itemprop="dateModified">2016-06-13</time>
     
   </p>
 </header>
@@ -106,19 +106,7 @@
     return height;
     }</code></p>
 <p>NSLog可以看出文本高度是17.9，跟字体大小15.0还是差的挺多的。</p>
-<h3 id="多行文本高度的计算方法"><a href="#多行文本高度的计算方法" class="headerlink" title="多行文本高度的计算方法"></a>多行文本高度的计算方法</h3><p>``<br>NSMutableAttributedString <em>GetAttributedText(NSString </em>value) {//这里调整富文本的段落格式<br>    NSMutableAttributedString <em>attributedString = [[NSMutableAttributedString alloc] initWithString:value];<br>    NSMutableParagraphStyle </em>paragraphStyle = [[NSMutableParagraphStyle alloc] init];<br>    [paragraphStyle setLineSpacing:8.0];<br>    //    [paragraphStyle setParagraphSpacing:11];  //调整段间距<br>    //    [paragraphStyle setHeadIndent:75.0];//段落整体缩进<br>    //    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进<br>    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [value length])];<br>    return attributedString;<br>    }</p>
-<pre><code>- (CGFloat)calculateMeaasgeHeightWithText:(NSString *)string andWidth:(CGFloat)width andFont:(UIFont *)font {
-static UILabel *stringLabel = nil;
-static dispatch_once_t onceToken;
-dispatch_once(&amp;onceToken, ^{//生成一个同于计算文本高度的label
-    stringLabel = [[UILabel alloc] init];
-    stringLabel.numberOfLines = 0;
-});
-stringLabel.font = font;
-stringLabel.attributedText = GetAttributedText(string);
-return [stringLabel sizeThatFits:CGSizeMake(width, MAXFLOAT)].height;
-} 
-</code></pre><p>``</p>
+<h3 id="多行文本高度的计算方法"><a href="#多行文本高度的计算方法" class="headerlink" title="多行文本高度的计算方法"></a>多行文本高度的计算方法</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableAttributedString</span> *GetAttributedText(<span class="built_in">NSString</span> *value) &#123;<span class="comment">//这里调整富文本的段落格式</span></span><br><span class="line">    <span class="built_in">NSMutableAttributedString</span> *attributedString = [[<span class="built_in">NSMutableAttributedString</span> alloc] initWithString:value];</span><br><span class="line">    <span class="built_in">NSMutableParagraphStyle</span> *paragraphStyle = [[<span class="built_in">NSMutableParagraphStyle</span> alloc] init];</span><br><span class="line">    [paragraphStyle setLineSpacing:<span class="number">8.0</span>];</span><br><span class="line">    <span class="comment">//    [paragraphStyle setParagraphSpacing:11];  //调整段间距</span></span><br><span class="line">    <span class="comment">//    [paragraphStyle setHeadIndent:75.0];//段落整体缩进</span></span><br><span class="line">    <span class="comment">//    [paragraphStyle setFirstLineHeadIndent:.0];//首行缩进</span></span><br><span class="line">    [attributedString addAttribute:<span class="built_in">NSParagraphStyleAttributeName</span> value:paragraphStyle range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, [value length])];</span><br><span class="line">    <span class="keyword">return</span> attributedString;</span><br><span class="line">    &#125;</span><br><span class="line">    - (<span class="built_in">CGFloat</span>)calculateMeaasgeHeightWithText:(<span class="built_in">NSString</span> *)string andWidth:(<span class="built_in">CGFloat</span>)width andFont:(<span class="built_in">UIFont</span> *)font &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">UILabel</span> *stringLabel = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;<span class="comment">//生成一个同于计算文本高度的label</span></span><br><span class="line">        stringLabel = [[<span class="built_in">UILabel</span> alloc] init];</span><br><span class="line">        stringLabel.numberOfLines = <span class="number">0</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    stringLabel.font = font;</span><br><span class="line">    stringLabel.attributedText = GetAttributedText(string);</span><br><span class="line">    <span class="keyword">return</span> [stringLabel sizeThatFits:<span class="built_in">CGSizeMake</span>(width, MAXFLOAT)].height;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
